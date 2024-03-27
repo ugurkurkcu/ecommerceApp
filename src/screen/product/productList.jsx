@@ -1,20 +1,28 @@
 //import liraries
-import React, {Component, useEffect, useState} from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, FlatList} from 'react-native';
 import {getRequest} from '../../service/verbs';
 import {PRODUCTS_URL} from '../../service/urls';
 import ProductCard from '../../components/product/productCard';
+import Spinner from '../../components/ui/spinner';
+import CategorySelect from '../../components/widgets/categorySelect';
 
 // create a component
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [isPending, setIsPending] = useState(false);
 
-  const getAllProducts = () => {
-    getRequest(PRODUCTS_URL)
+  const getAllProducts = category => {
+    const url = category
+      ? PRODUCTS_URL + `/category/${category}`
+      : PRODUCTS_URL;
+    setIsPending(true);
+    getRequest(url)
       .then(res => {
         setProducts(res.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => setIsPending(false));
   };
 
   useEffect(() => {
@@ -23,12 +31,18 @@ const ProductList = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        numColumns={2}
-        showsHorizontalScrollIndicator={false}
-        data={products}
-        renderItem={({item}) => <ProductCard item={item} />}
-      />
+      <CategorySelect onSelect={value => getAllProducts(value)} />
+      {isPending ? (
+        <Spinner />
+      ) : (
+        <FlatList
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{paddingBottom: 50}}
+          data={products}
+          renderItem={({item}) => <ProductCard item={item} />}
+        />
+      )}
     </View>
   );
 };

@@ -6,7 +6,7 @@ import {CATEGORIES_URL} from '../../service/urls';
 
 const CategorySelect = ({onSelect}) => {
   const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState('electronics');
+  const [category, setCategory] = useState();
 
   const getCategories = () => {
     getRequest(CATEGORIES_URL)
@@ -28,7 +28,10 @@ const CategorySelect = ({onSelect}) => {
       <TouchableOpacity
         onPress={() => selectCategory(item)}
         style={category == item ? styles.activeSlider : styles.slider}>
-        <Text>{item}</Text>
+        <Text
+          style={{color: item == category ? AppColors.WHITE : AppColors.BLACK}}>
+          {item}
+        </Text>
       </TouchableOpacity>
     );
   };
@@ -46,9 +49,8 @@ const CategorySelect = ({onSelect}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginVertical: 12,
-    backgroundColor: AppColors.WHITE,
+    flexDirection: 'row',
+    margin: 10,
   },
   slider: {
     backgroundColor: AppColors.SOFT_GRAY,

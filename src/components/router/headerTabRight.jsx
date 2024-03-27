@@ -6,19 +6,21 @@ import {CART} from '../../utils/routes';
 import {useState} from 'react';
 
 // create a component
-const HeaderTabRight = () => {
+const HeaderTabRight = ({search}) => {
   const navigation = useNavigation();
   const [count, setCount] = useState(2);
 
   return (
     <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-      <TouchableOpacity>
-        <SearchNormal
-          color={AppColors.SECONDARY}
-          size="24"
-          style={{marginRight: 10}}
-        />
-      </TouchableOpacity>
+      {search && (
+        <TouchableOpacity>
+          <SearchNormal
+            color={AppColors.SECONDARY}
+            size="24"
+            style={{marginRight: 10}}
+          />
+        </TouchableOpacity>
+      )}
       <TouchableOpacity onPress={() => navigation.navigate(CART)}>
         <ShoppingCart
           color={AppColors.SECONDARY}

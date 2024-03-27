@@ -1,14 +1,26 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Pressable,
+} from 'react-native';
 import {height, width} from '../../utils/constants';
 import {AppColors} from '../../theme/colors';
 import {Heart} from 'iconsax-react-native';
+import {useNavigation} from '@react-navigation/native';
+import {PRODUCTDETAIL} from '../../utils/routes';
+import Button from '../ui/button';
 
-// create a component
 const ProductCard = ({item}) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.mainContainer}>
+    <Pressable
+      onPress={() => navigation.navigate(PRODUCTDETAIL,{item:item})}
+      style={styles.mainContainer}>
       <View style={styles.container}>
         <Image style={styles.image} source={{uri: item.image}} />
         <Text numberOfLines={3} style={styles.title}>
@@ -28,7 +40,10 @@ const ProductCard = ({item}) => {
           <Heart variant="Bold" color={AppColors.PRIMARY} />
         </TouchableOpacity>
       </View>
-    </View>
+      <View>
+        <Button title={"Add To Bag"}/>
+      </View>
+    </Pressable>
   );
 };
 

@@ -10,7 +10,7 @@ const BestSeller = () => {
   const [products, setProducts] = useState([]);
 
   const getBestSellerProducts = (category = 'electronics') => {
-    getRequest(CATEGORY_URL + category, {limit:4,sort:"asc"})
+    getRequest(CATEGORY_URL + category, {limit: 4, sort: 'asc'})
       .then(res => {
         setProducts(res.data);
       })
@@ -26,6 +26,7 @@ const BestSeller = () => {
       <WidgetTitle title={'Best Seller'} />
       <CategorySelect onSelect={value => getBestSellerProducts(value)} />
       <FlatList
+        contentContainerStyle={{paddingBottom: 50}}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
         data={products}

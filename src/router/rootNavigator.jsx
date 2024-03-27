@@ -8,6 +8,7 @@ import TabNavigator from './tabNavigator';
 import {AppColors} from '../theme/colors';
 import ProductList from '../screen/product/productList';
 import ProductDetail from '../screen/product/productDetail';
+import HeaderTabRight from '../components/router/headerTabRight';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,8 +25,24 @@ function RootNavigator() {
         component={TabNavigator}
       />
       <Stack.Screen name={CART} component={Cart} />
-      <Stack.Screen name={PRODUCTLIST} component={ProductList} />
-      <Stack.Screen name={PRODUCTDETAIL} component={ProductDetail} />
+      <Stack.Screen
+        options={({route, navigation}) => ({
+          headerRight: () => <HeaderTabRight search />,
+          tabBarActiveTintColor: AppColors.PRIMARY,
+          tabBarInactiveTintColor: AppColors.SECONDARY,
+        })}
+        name={PRODUCTLIST}
+        component={ProductList}
+      />
+      <Stack.Screen
+        options={({route, navigation}) => ({
+          headerRight: () => <HeaderTabRight  />,
+          tabBarActiveTintColor: AppColors.PRIMARY,
+          tabBarInactiveTintColor: AppColors.SECONDARY,
+        })}
+        name={PRODUCTDETAIL}
+        component={ProductDetail}
+      />
     </Stack.Navigator>
   );
 }

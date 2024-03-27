@@ -5,7 +5,7 @@ const AppColors = {
   SOFT_GRAY: '#DDDDDD',
   PRIMARY: '#FF0000',
   SECONDARY: '#AAAAAA',
-
+  GOLD: '#FFD700',
 };
 
 export {AppColors};

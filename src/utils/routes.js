@@ -1,8 +1,8 @@
-export const HOME = 'Anasayfa';
-export const CART = 'Sepet';
-export const CATEGORIES = 'Kategoriler';
-export const PROFILE = 'Profil';
-export const FAVOURITES = 'Favoriler';
+export const HOME = 'Main Page';
+export const CART = 'Bag';
+export const CATEGORIES = 'Categories';
+export const PROFILE = 'Profile';
+export const FAVOURITES = 'Favourites';
 export const TABNAVIGATOR = 'TabNavigator';
-export const PRODUCTLIST = 'Ürün Listesi';
-export const PRODUCTDETAIL = 'Ürün Detayı';
+export const PRODUCTLIST = 'List';
+export const PRODUCTDETAIL = 'Details';

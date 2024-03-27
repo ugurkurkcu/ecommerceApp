@@ -24,7 +24,7 @@ export default function TabNavigator() {
             route={route}
           />
         ),
-        headerRight: ({focused, color, size}) => <HeaderTabRight />,
+        headerRight: ({focused, color, size}) => <HeaderTabRight search />,
         tabBarActiveTintColor: AppColors.PRIMARY,
         tabBarInactiveTintColor: AppColors.SECONDARY,
       })}>
