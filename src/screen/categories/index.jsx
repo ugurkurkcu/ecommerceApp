@@ -1,26 +1,56 @@
-//import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { AppColors } from '../../theme/colors';
+import React, {Component, useEffect, useState} from 'react';
+import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
+import {AppColors} from '../../theme/colors';
+import {getRequest} from '../../service/verbs';
+import {CATEGORIES_URL} from '../../service/urls';
+import CategoryCard from '../../components/categories/CategoryCard';
+import {screenStyle} from '../../styles/screenStyle';
+import Spinner from '../../components/ui/spinner';
 
-// create a component
-const Categories = () => {
-    return (
-        <View style={styles.container}>
-            <Text>Categories</Text>
-        </View>
-    );
+const Categories = ({onSelect}) => {
+  const [categories, setCategories] = useState([]);
+  const [isPanding, setIsPanding] = useState(false);
+
+  const getCategories = () => {
+    setIsPanding(true);
+    getRequest(CATEGORIES_URL)
+      .then(res => setCategories(res.data))
+      .catch(err => console.log(err))
+      .finally(() => setIsPanding(false));
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  return (
+    <View style={screenStyle.container}>
+      {isPanding ? (
+        <Spinner />
+      ) : (
+        <FlatList
+          showsHorizontalScrollIndicator={false}
+          data={categories}
+          renderItem={({item}) => <CategoryCard item={item} />}
+        />
+      )}
+    </View>
+  );
 };
 
-// define your styles
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor:  AppColors.WHITE,
-    },
+  slider: {
+    backgroundColor: AppColors.SOFT_GRAY,
+    borderRadius: 20,
+    padding: 10,
+    marginRight: 8,
+  },
+  activeSlider: {
+    backgroundColor: AppColors.PRIMARY,
+    borderRadius: 20,
+    padding: 10,
+    marginRight: 8,
+  },
 });
 
-//make this component available to the app
 export default Categories;

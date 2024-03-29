@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component, useEffect} from 'react';
+import React, {Component, useContext, useEffect} from 'react';
 import {
   View,
   Text,
@@ -16,20 +16,12 @@ import Counter from '../../components/ui/counter';
 import {getRequest} from '../../service/verbs';
 import {PRODUCTS_URL} from '../../service/urls';
 import {Heart, Star1} from 'iconsax-react-native';
+import StoreContext from '../../context';
 
 // create a component
 const ProductDetail = ({route}) => {
   const {item} = route?.params;
-
-  // const getProductDetail = () => {
-  //   getRequest(PRODUCTS_URL + `/${item.id}`)
-  //     .then(res => console.log(res.data))
-  //     .catch(err => console.log(err));
-  // };
-
-  // useEffect(() => {
-  //   getProductDetail();
-  // }, []);
+  const {addToBag} = useContext(StoreContext);
 
   return (
     <SafeAreaView style={{flex: 1, paddingTop: 100}}>
@@ -61,17 +53,19 @@ const ProductDetail = ({route}) => {
               justifyContent: 'flex-start',
               gap: 5,
               marginLeft: 15,
-              paddingTop:10
+              paddingTop: 10,
             }}>
             <Star1 size="24" color={AppColors.GOLD} variant="Bold" />
-            <Text style={styles.price}>{item.rating.rate} / {item.rating.count}</Text>
+            <Text style={styles.price}>
+              {item.rating.rate} / {item.rating.count}
+            </Text>
           </View>
           <Text style={styles.desc}>{item.description}</Text>
         </View>
       </ScrollView>
       <View style={styles.bottomArea}>
         <Counter onChange={value => console.log(value)} />
-        <Button title="Add To Bag" />
+        <Button onPress={() => addToBag(item)} title="Add To Bag" />
       </View>
     </SafeAreaView>
   );
@@ -121,7 +115,7 @@ const styles = StyleSheet.create({
   bottomArea: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     height: height * 0.07,
   },
 });

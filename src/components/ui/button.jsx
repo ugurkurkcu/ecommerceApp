@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 2,
     shadowOffset: 0,
     shadowRadius: 3,
+    margin: 10,
   },
   text: {
     color: AppColors.WHITE,

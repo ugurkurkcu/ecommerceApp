@@ -1,14 +1,17 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import {AppColors} from '../../theme/colors';
 import {SearchNormal, ShoppingCart} from 'iconsax-react-native';
 import {useNavigation} from '@react-navigation/native';
 import {CART} from '../../utils/routes';
-import {useState} from 'react';
+import {useContext} from 'react';
+import Badge from '../bag/badge';
+import StoreContext from '../../context';
 
 // create a component
 const HeaderTabRight = ({search}) => {
   const navigation = useNavigation();
-  const [count, setCount] = useState(2);
+  const {bag} = useContext(StoreContext);
+  const count = bag.length;
 
   return (
     <View style={{flexDirection: 'row', justifyContent: 'center'}}>
@@ -27,23 +30,7 @@ const HeaderTabRight = ({search}) => {
           size="24"
           style={{marginRight: 15}}
         />
-        {count > 0 && (
-          <View
-            style={{
-              position: 'absolute',
-              backgroundColor: AppColors.PRIMARY,
-              opacity: 50,
-              borderRadius: 10,
-              width: 18,
-              height: 18,
-              right: 10,
-              top: -5,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Text style={{color: AppColors.WHITE}}>{count}</Text>
-          </View>
-        )}
+        {count > 0 && <Badge count={count} />}
       </TouchableOpacity>
     </View>
   );

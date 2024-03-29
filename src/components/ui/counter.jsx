@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   countArea: {
     flexDirection: 'row',
-    width: width * 0.3,
+    width: width * 0.25,
     paddingHorizontal: 10,
     justifyContent: 'space-around',
     alignItems: 'center',

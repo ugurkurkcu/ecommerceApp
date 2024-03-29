@@ -6,3 +6,5 @@ export const FAVOURITES = 'Favourites';
 export const TABNAVIGATOR = 'TabNavigator';
 export const PRODUCTLIST = 'List';
 export const PRODUCTDETAIL = 'Details';
+export const CHECKOUT = 'CheckOut';
+export const LOGIN = 'Login';

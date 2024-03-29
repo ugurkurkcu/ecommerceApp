@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component} from 'react';
+import React, {Component, useContext} from 'react';
 import {
   View,
   Text,
@@ -14,12 +14,14 @@ import {Heart} from 'iconsax-react-native';
 import {useNavigation} from '@react-navigation/native';
 import {PRODUCTDETAIL} from '../../utils/routes';
 import Button from '../ui/button';
+import StoreContext from '../../context';
 
 const ProductCard = ({item}) => {
   const navigation = useNavigation();
+  const {addToBag} = useContext(StoreContext);
   return (
     <Pressable
-      onPress={() => navigation.navigate(PRODUCTDETAIL,{item:item})}
+      onPress={() => navigation.navigate(PRODUCTDETAIL, {item: item})}
       style={styles.mainContainer}>
       <View style={styles.container}>
         <Image style={styles.image} source={{uri: item.image}} />
@@ -41,7 +43,7 @@ const ProductCard = ({item}) => {
         </TouchableOpacity>
       </View>
       <View>
-        <Button title={"Add To Bag"}/>
+        <Button onPress={() => addToBag(item)} title={'Add To Bag'} />
       </View>
     </Pressable>
   );

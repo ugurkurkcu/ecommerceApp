@@ -3,12 +3,21 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Cart from '../screen/cart';
-import {CART, PRODUCTDETAIL, PRODUCTLIST, TABNAVIGATOR} from '../utils/routes';
+import {
+  CART,
+  CHECKOUT,
+  LOGIN,
+  PRODUCTDETAIL,
+  PRODUCTLIST,
+  TABNAVIGATOR,
+} from '../utils/routes';
 import TabNavigator from './tabNavigator';
 import {AppColors} from '../theme/colors';
 import ProductList from '../screen/product/productList';
 import ProductDetail from '../screen/product/productDetail';
 import HeaderTabRight from '../components/router/headerTabRight';
+import Login from '../screen/login';
+import CheckOut from '../screen/checkOut';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +27,9 @@ function RootNavigator() {
       screenOptions={{
         headerBackTitleVisible: false,
         headerTintColor: AppColors.PRIMARY,
+        contentStyle: {
+          textTransform: 'capitalize',
+        },
       }}>
       <Stack.Screen
         options={{headerShown: false}}
@@ -28,6 +40,7 @@ function RootNavigator() {
       <Stack.Screen
         options={({route, navigation}) => ({
           headerRight: () => <HeaderTabRight search />,
+          title: route?.params?.title,
           tabBarActiveTintColor: AppColors.PRIMARY,
           tabBarInactiveTintColor: AppColors.SECONDARY,
         })}
@@ -36,12 +49,28 @@ function RootNavigator() {
       />
       <Stack.Screen
         options={({route, navigation}) => ({
-          headerRight: () => <HeaderTabRight  />,
+          headerRight: () => <HeaderTabRight />,
           tabBarActiveTintColor: AppColors.PRIMARY,
           tabBarInactiveTintColor: AppColors.SECONDARY,
         })}
         name={PRODUCTDETAIL}
         component={ProductDetail}
+      />
+      <Stack.Screen
+        options={({route, navigation}) => ({
+          tabBarActiveTintColor: AppColors.PRIMARY,
+          tabBarInactiveTintColor: AppColors.SECONDARY,
+        })}
+        name={LOGIN}
+        component={Login}
+      />
+      <Stack.Screen
+        options={({route, navigation}) => ({
+          tabBarActiveTintColor: AppColors.PRIMARY,
+          tabBarInactiveTintColor: AppColors.SECONDARY,
+        })}
+        name={CHECKOUT}
+        component={CheckOut}
       />
     </Stack.Navigator>
   );

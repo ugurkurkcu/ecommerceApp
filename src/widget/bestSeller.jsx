@@ -23,7 +23,7 @@ const BestSeller = () => {
 
   return (
     <View style={styles.container}>
-      <WidgetTitle title={'Best Seller'} />
+      <WidgetTitle title={'Best Seller'} category="electronics"/>
       <CategorySelect onSelect={value => getBestSellerProducts(value)} />
       <FlatList
         contentContainerStyle={{paddingBottom: 50}}

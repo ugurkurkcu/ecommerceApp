@@ -8,9 +8,10 @@ import Spinner from '../../components/ui/spinner';
 import CategorySelect from '../../components/widgets/categorySelect';
 
 // create a component
-const ProductList = () => {
+const ProductList = ({route}) => {
   const [products, setProducts] = useState([]);
   const [isPending, setIsPending] = useState(false);
+  const selectedCategory = route?.params?.category
 
   const getAllProducts = category => {
     const url = category
@@ -26,7 +27,7 @@ const ProductList = () => {
   };
 
   useEffect(() => {
-    getAllProducts();
+    getAllProducts(selectedCategory);
   }, []);
 
   return (
